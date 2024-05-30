@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
     res.sendFile('index.html', { root: 'public' })
 })
 
-app.use('/bancosolar', bancoSolarRoutes);
+app.use('/usuarios', bancoSolarRoutes);
 
 // Middleware para manejar rutas no encontradas (404)
 app.use((req, res) => {

@@ -260,6 +260,7 @@
   const getUsuarios = async () => {
     const response = await fetch("http://localhost:3000/usuarios");
     let data = await response.json();
+    data = data.usuarios
     $(".usuarios").html("");
 
     $.each(data, (i, c) => {

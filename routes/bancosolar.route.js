@@ -1,9 +1,9 @@
 import { Router } from "express";
+import bancosolarController from "../controllers/bancosolar.controller.js";
+
 
 const router = Router();
 
-router.get('/', (req, res) => {
-    res.json({ok : true})
-})
+router.get('/', bancosolarController.getClienteController)
 
 export default router;
