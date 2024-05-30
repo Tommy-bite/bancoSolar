@@ -216,16 +216,20 @@
     let nombre = $("form:first input:first").val();
     let balance = Number($("form:first input:nth-child(2)").val());
     try {
-      const response = await fetch("http://localhost:3000/usuario", {
+      const response = await fetch("http://localhost:3000/usuarios", {
         method: "post",
         body: JSON.stringify({
           nombre,
           balance,
         }),
+        headers : {
+          "Content-Type" : "application/json"
+        }
       });
       $("form:first input:first").val("");
       $("form:first input:nth-child(2)").val("");
-      location.reload();
+      alert("Usuario creado");
+      getUsuarios();
     } catch (e) {
       alert("Algo salió mal ..." + e);
     }
@@ -250,7 +254,8 @@
         }),
       });
       const data = await response.json();
-      location.reload();
+      alert("Usuario creado");
+      getUsuarios();
     } catch (e) {
       console.log(e);
       alert("Algo salió mal..." + e);

@@ -19,8 +19,39 @@ const getClienteController = async (req, res) => {
   }
 };
 
+const createClienteController = async (req, res) => {
+  // Lógica para obtener todas las canciones
+  const { nombre, balance } = req.body;
+
+  if(!nombre || !balance){
+    return res.status(400).json({ message: "Todos los campos son obligatorios" });
+  }
+
+  try {
+
+    const newUsuario = {
+      nombre,
+      balance
+    }
+
+    const usuario = await modelBancoSolar.createClienteModel(newUsuario);
+
+    if(!usuario){
+        return res.status(400).json({ message: "No se creo el usuario" });
+    }
+
+    return res
+      .status(201)
+      .json({  usuario });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Error al obtener al crear usuario" , error });
+  }
+};
+
 
 // Exportar todas las funciones como un objeto
 export default {
     getClienteController,
+    createClienteController
 };
