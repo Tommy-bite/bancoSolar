@@ -1,5 +1,6 @@
 import express from 'express';
 import bancoSolarRoutes from './routes/bancosolar.route.js'
+import transferenciasRoutes from './routes/transferencia.route.js'
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,6 +14,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/usuarios', bancoSolarRoutes);
+app.use('/transferencias', transferenciasRoutes);
 
 // Middleware para manejar rutas no encontradas (404)
 app.use((req, res) => {
