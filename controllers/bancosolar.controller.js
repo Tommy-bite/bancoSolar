@@ -86,9 +86,37 @@ const updateClienteController = async (req, res) => {
 
 };
 
+const deleteClienteController = async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ message: "El ID es obligatorio" });
+  }
+
+  try {
+    const cliente = await modelBancoSolar.getClienteById(id);
+
+    if (!cliente) {
+      return res
+        .status(400)
+        .json({
+          message: "No se puede eliminar este usuario porque no existe",
+        });
+    }
+
+    await modelBancoSolar.deleteUsuarioModel(id);
+
+    return res.status(200).json({ message: "Usuario eliminada exitosamente" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Error al eliminar al Usuario" });
+  }
+};
+
 // Exportar todas las funciones como un objeto
 export default {
   getClienteController,
   createClienteController,
   updateClienteController,
+  deleteClienteController
 };

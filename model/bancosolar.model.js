@@ -58,9 +58,25 @@ const updateClienteModel = async (id, editCliente) => {
   }
 };
 
+const deleteUsuarioModel = async (id) => {
+  try {
+    const query = {
+      text: "DELETE FROM usuarios WHERE id = $1",
+      values: [id],
+    };
+
+    const { rows } = await pool.query(query);
+
+    return rows;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const modelBancoSolar = {
   getClienteModel,
   createClienteModel,
   getClienteById,
   updateClienteModel,
+  deleteUsuarioModel
 };
